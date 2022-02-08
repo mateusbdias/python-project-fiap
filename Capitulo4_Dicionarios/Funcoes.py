@@ -1,25 +1,31 @@
 def perguntar():
-    resposta = input("Selecione uma opção: \n'I' para inserir um usuário\n'P'"
+    resposta = input("Selecione uma opção: \n'I' para inserir um usuário\n'P' "
                      "para pesquisar um usuário\n'E' para excluir um usuário\n"
-                     "'L' para listar os usuários").upper()
+                     "'L' para listar os usuários\nOpção: ").upper()
     return resposta
 
 
 def inserir(dicionario):
-    chave = input("Digite o login: ")
+    chave = input("Digite o código: ")
     dicionario[chave] = [
+        input("Digite o login: "),
         input("Digite o nome: "),
-        input("Digite a última data de acesso: "),
-        input("Digite a última estação acessada: ")
+        input("Digite a data de acesso: "),
+        input("Digite a hora de acesso: "),
+        input("Digite a estação acessada: "),
+        input("Digite o nível do usuário: ")
     ]
 
 
 def pesquisar(dicionario, chave):
     lista = dicionario.get(chave)
     if lista is not None:
-        print("Nome..........: " + lista[0])
-        print("Último acesso.: " + lista[1])
-        print("Última estação: " + lista[2])
+        print("Login..........: " + lista[0])
+        print("Nome...........: " + lista[1])
+        print("Data de acesso.: " + lista[2])
+        print("Hora de acesso.: " + lista[3])
+        print("Estação........: " + lista[4])
+        print("Nível..........: " + lista[5])
 
 
 def excluir(dicionario, chave):
@@ -31,5 +37,5 @@ def excluir(dicionario, chave):
 def listar(dicionario):
     for chave, valor in dicionario.items():
         print("Objeto.......")
-        print("Login:", chave)
+        print("Código:", chave)
         print("Dados:", valor)
