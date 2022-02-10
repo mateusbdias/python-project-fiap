@@ -1,15 +1,35 @@
 with open("economic-indicators.csv", "r") as boston:
-    total = 0
-    maior = 0
+    total_voos = 0
+    maior_passageiros = 0
+    mes = 0
+    ano = 0
     total_passageiros = 0
+    maior_media_hotel = 0
+    mes_maior_media = 0
+    ano_pesquisa = input("Digite o ano a ser pesquisado: ")
     for linha in boston.readlines()[1:-1]:
-        total += int(linha.split(",")[3])
-    print("O total de voos é: ", total)
-    lista_passageiros = {}
-    for linha in boston.readlines()[1:-1]:
-        lista_passageiros[(linha.split(",")[0], linha.split(",")[1])]: linha.split(",")[2]
+        lista = linha.split(",")
+        # Total de voos internacionais
+        if lista[0] == ano_pesquisa:
+            total_voos += int(lista[3])
+        # Data do maior trânsito de passageiros
+        if int(lista[2]) > int(maior_passageiros):
+            maior_passageiros = int(lista[2])
+            mes = lista[1]
+            ano = lista[0]
+        # Total de passageiros
+        if lista[0] == ano_pesquisa:
+            total_passageiros += int(lista[2])
+        # Maior média da diária de hotel
+        if lista[0] == ano_pesquisa:
+            if float(lista[5]) > float(maior_media_hotel):
+                maior_media_hotel = lista[5]
+                mes_maior_media = lista[1]
 
-    for dados in lista_passageiros.values():
-        valor_maximo = max(lista_passageiros.values())
-        data_valor_maximo = lista_passageiros.keys()
-    print("O valor máximo de passageiros data de: ", data_valor_maximo)
+    print("O total de voos no ano de " + str(ano_pesquisa) + " foi de: " +
+          str(total_voos))
+    print("O valor máximo de passageiros data de: " + str(mes) + "/" + str(ano))
+    print("O total de passageiros no ano de " + str(ano_pesquisa) +
+          " foi de " + str(total_passageiros))
+    print("O mês com maior média da diária de hotel no ano de " +
+          str(ano_pesquisa) + " foi: " + str(mes_maior_media))
